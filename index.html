@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Excel Data Explorer</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="upload-card" id="uploadCard">
+        <div class="upload-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            />
+          </svg>
+        </div>
+
+        <h1>Excel Data Explorer</h1>
+        <p class="subtitle">
+          Upload your spreadsheet to explore and navigate through the data
+        </p>
+
+        <div class="drag-drop-area" id="dropArea">
+          <input
+            type="file"
+            name="excelFile"
+            id="fileInput"
+            class="file-input"
+            accept=".xls,.xlsx,.csv"
+            required
+          />
+          <label for="fileInput" class="file-label">
+            <i class="fas fa-file-upload"></i>
+            Choose Excel File
+          </label>
+          <div class="file-name" id="fileName">No file selected</div>
+        </div>
+
+        <div class="loader" id="loader">
+          <div class="spinner"></div>
+          <p>Processing your file...</p>
+        </div>
+
+        <div class="status-message" id="statusMessage"></div>
+      </div>
+
+      <div class="results hidden" id="results">
+        <div class="progress-container">
+          <div class="progress-header">
+            <h3>Completion Progress</h3>
+            <span id="progressText">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+        <div class="nav-controls">
+          <div class="row-info">
+            <!-- <span id="rowIndex">Row 1 of 0</span> -->
+          </div>
+          <div class="nav-buttons hidden" id="navControls">
+            <button class="btn btn-outline" id="prevBtn">
+              <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <button class="btn btn-outline" id="nextBtn">
+              Next <i class="fas fa-chevron-right"></i>
+            </button>
+            <button class="btn btn-primary" id="exitBtn">
+              <i class="fas fa-file-export"></i> Exit
+            </button>
+          </div>
+        </div>
+
+        <div class="data-display">
+          <div class="data-card">
+            <div class="data-title">
+              <i class="fas fa-table"></i>
+              Current Row Data
+              <span class="data-subtitle" id="rowPosition">Row 1 of 10</span>
+            </div>
+            <div class="key-value-container" id="currentRow">
+              <div class="key-value-scroll flex flex-row justify-between">
+                <!-- Content will be added here by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="data-card">
+            <div class="data-title">
+              <i class="fas fa-columns"></i>
+              Column Headers
+            </div>
+            <div class="json-viewer" id="headersOutput"></div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Include SheetJS library for Excel parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="./main.js" type="module"></script>
+  </body>
+</html>
