@@ -46,6 +46,10 @@ export default class ExcelModel {
     return this.data.length;
   }
 
+  setHeaders(headers) {
+    this.headers = headers;
+  }
+
   setLoading(isLoading) {
     this.state.isLoading = isLoading;
   }

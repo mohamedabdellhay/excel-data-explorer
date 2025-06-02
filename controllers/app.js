@@ -106,16 +106,26 @@ export default class ExcelController {
     }
   }
   exit() {
+    const allRows = this.model.data.length;
+    const done = this.model.data.filter((row) => row.completed).length;
+    console.log(allRows, done);
+    if (done < allRows) {
+      if (!confirm(`You Still have ${allRows - done} rows to complete. Are you sure you want to exit?`)) {
+        return;
+      }
+    }
     this.model.setData([]);
     this.model.setCurrentIndex(0);
+    this.model.setLoading(false);
+    this.model.setHeaders([]);
     this.view.uploadCard.classList.remove("hidden");
-
     this.view.results.style.display = "none";
     this.view.fileName.textContent = "No file selected";
     this.view.statusMessage.textContent = "";
     this.view.statusMessage.style.display = "none";
     this.view.loader.style.display = "none";
     this.view.copyBtn = null;
+    console.log(this.model);
   }
   toggleCompletion() {
     const currentRow = this.model.getCurrentRow();
