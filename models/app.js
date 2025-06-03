@@ -86,6 +86,8 @@ export default class ExcelModel {
       (completedCount / this.data.length) * 100
     );
   }
-
-  
+  isCompletedAll() {
+    const completedData = this.data.filter((row) => row.completed === true);
+    return completedData.length === this.data.length;
+  }
 }

@@ -9,6 +9,7 @@ export default class ExcelController {
       this.showNextRow.bind(this),
       this.exit.bind(this)
     );
+    this.preventUserFromLeaving();
   }
 
   handleFileUpload(event) {
@@ -105,12 +106,18 @@ export default class ExcelController {
       this.view.showError("Failed to export data: " + error.message);
     }
   }
+
   exit() {
     const allRows = this.model.data.length;
     const done = this.model.data.filter((row) => row.completed).length;
-    console.log(allRows, done);
     if (done < allRows) {
-      if (!confirm(`You Still have ${allRows - done} rows to complete. Are you sure you want to exit?`)) {
+      if (
+        !confirm(
+          `You Still have ${
+            allRows - done
+          } rows to complete. Are you sure you want to exit?`
+        )
+      ) {
         return;
       }
     }
@@ -127,10 +134,28 @@ export default class ExcelController {
     this.view.copyBtn = null;
     console.log(this.model);
   }
+
   toggleCompletion() {
     const currentRow = this.model.getCurrentRow();
     currentRow.completed = !currentRow.completed;
     this.model.calculateCompletion();
     this.updateDisplay();
+  }
+
+  preventUserFromLeaving() {
+    window.onbeforeunload = (event) => {
+      const remaining = this.model.data.length - this.model.currentIndex;
+      if (remaining > 0) {
+        const message = `You still have ${remaining} rows to complete. Are you sure you want to leave?`;
+
+        event.preventDefault();
+        event.returnValue = message;
+        return message;
+      }
+      return undefined;
+    };
+  }
+  allowUserToLeave() {
+    window.onbeforeunload = null;
   }
 }
