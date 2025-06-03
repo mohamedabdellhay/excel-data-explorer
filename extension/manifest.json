@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Conditional Tab Manager",
+  "version": "1.0",
+  "description": "Only manages tabs when Elghazawy domains are available",
+  "permissions": [
+    "tabs",
+    "alarms",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://admin.elghazawy.com/*",
+    "https://elghazawy.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": {
+      "128": "icons/icon128.png"
+    },
+    "default_title": "Conditional Tab Manager - Inactive"
+  },
+  "icons": {
+    "128": "icons/icon128.png"
+  }
+}
