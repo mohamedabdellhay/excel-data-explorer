@@ -86,7 +86,7 @@ export default class ExcelModel {
       (completedCount / this.data.length) * 100
     );
   }
-  isCompletedAll() {
+  isAllCompleted() {
     const completedData = this.data.filter((row) => row.completed === true);
     return completedData.length === this.data.length;
   }

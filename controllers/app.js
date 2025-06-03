@@ -143,6 +143,11 @@ export default class ExcelController {
   }
 
   preventUserFromLeaving() {
+    const done = this.model.isAllCompleted();
+    if (done) {
+      this.allowUserToLeave();
+      return;
+    }
     window.onbeforeunload = (event) => {
       const remaining = this.model.data.length - this.model.currentIndex;
       if (remaining > 0) {
