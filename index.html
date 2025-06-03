@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Excel Data Explorer</title>
-    <link rel="icon" type="image/svg" href="https://res.cdn.office.net/files/fabric-cdn-prod_20240610.001/assets/brand-icons/product/svg/excel_16x1.svg">
+    <link
+      rel="icon"
+      type="image/svg"
+      href="https://res.cdn.office.net/files/fabric-cdn-prod_20240610.001/assets/brand-icons/product/svg/excel_16x1.svg"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -118,5 +122,13 @@
     <!-- Include SheetJS library for Excel parsing -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <script src="./main.js" type="module"></script>
+    <script>
+      document.addEventListener("mouseout", function (e) {
+        if (!e.toElement && !e.relatedTarget) {
+          // Show your popup/modal with special offer
+          alert("You left the page");
+        }
+      });
+    </script>
   </body>
 </html>

@@ -143,21 +143,15 @@ export default class ExcelController {
   }
 
   preventUserFromLeaving() {
-    const done = this.model.isAllCompleted();
-    if (done) {
+    const done = this.model.data.filter((row) => row.completed).length;
+    const allRows = this.model.data.length;
+    if (done === allRows) {
       this.allowUserToLeave();
       return;
     }
     window.onbeforeunload = (event) => {
-      const remaining = this.model.data.length - this.model.currentIndex;
-      if (remaining > 0) {
-        const message = `You still have ${remaining} rows to complete. Are you sure you want to leave?`;
-
-        event.preventDefault();
-        event.returnValue = message;
-        return message;
-      }
-      return undefined;
+      event.preventDefault();
+      event.returnValue = "Are you sure you want to leave?";
     };
   }
   allowUserToLeave() {
